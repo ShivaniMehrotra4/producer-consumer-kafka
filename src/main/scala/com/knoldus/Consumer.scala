@@ -1,15 +1,16 @@
 package com.knoldus
 
+import java.io.{BufferedWriter, File, FileWriter}
 import java.util
 import java.util.Properties
 
-import com.knoldus.model.User
+import com.knoldus.model.{Constants, User}
 
 import scala.collection.JavaConverters._
 import org.apache.kafka.clients.consumer.KafkaConsumer
 
 
-object Consumer extends App {
+object Consumer {
 
 
   def readFromKafka(topic: String): Unit = {
@@ -26,7 +27,7 @@ object Consumer extends App {
     consumer.subscribe(util.Arrays.asList(topic))
 
     while (true) {
-      val records = consumer.poll(100).asScala
+      val records = consumer.poll(Constants.timeout).asScala
       for (record <- records.iterator) {
         println(record.value())
       }
@@ -34,4 +35,12 @@ object Consumer extends App {
   }
     readFromKafka("json")
 
+  def writeUserToFile(user: List[User]): Unit = {
+    user.foreach(data => {
+      val writer = new BufferedWriter(new FileWriter(new File("./src/main/resources/userParsedData.txt")
+        , true))
+      writer.write("\n" + data.toString)
+      writer.close()
+    })
+  }
 }

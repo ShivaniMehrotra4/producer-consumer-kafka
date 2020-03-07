@@ -3,7 +3,6 @@ package com.knoldus
 import java.util.Properties
 
 import com.knoldus.jsonUtilities.ParseJson
-import com.knoldus.model.User
 import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord}
 
 object Producer extends App {
@@ -20,7 +19,7 @@ object Producer extends App {
     val producer = new KafkaProducer[String, String](props)
     //val topic = "json"
 
-    val msg = "Hello!!"
+    val msg: String = "Hello!!"
     //val jsonResult = parseJson.parseData()
     val record = new ProducerRecord[String,String](topic, "key",msg)
     producer.send(record)
