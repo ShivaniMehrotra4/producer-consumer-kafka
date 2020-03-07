@@ -20,9 +20,10 @@ object Producer extends App {
     //val topic = "json"
 
     val msg: String = "Hello!!"
-    //val jsonResult = parseJson.parseData()
-    val record = new ProducerRecord[String,String](topic, "key",msg)
+    val jsonResult = parseJson.parseData()
+    val record = new ProducerRecord[String,String](topic, "key",s"$jsonResult".toString)
     producer.send(record)
+    println("sent!!!!!!!!!")
     producer.close()
 
   }

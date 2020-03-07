@@ -9,11 +9,25 @@ class ParseJson {
 
   def parseData(): List[User] = {
 
+    def getJsonData: String = {
+      """  [
+      {
+        "id": 0001,
+        "name": "shivani",
+        "age": 24,
+        "address": "Sahibabad"
+
+      }
+    ]
+  """
+    }
+
     implicit val formats: DefaultFormats.type = DefaultFormats
 
-    val filePath = "/home/knoldus/KAFKA/PersonDetails.json"
-    val jsonData: BufferedSource = Source.fromFile(filePath)
-    val parsedJson: JValue = net.liftweb.json.parse(jsonData.mkString)
+    val jsonData = getJsonData
+    //    val filePath = "./src/main/resources/PersonDetails.json"
+    //    val jsonData = Source.fromFile(filePath)
+    val parsedJson: JValue = net.liftweb.json.parse(jsonData)
     //println(parsedJson.children.map(user => user.extract[User]))
     parsedJson.children.map(user => user.extract[User])
   }

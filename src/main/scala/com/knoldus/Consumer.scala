@@ -3,14 +3,12 @@ package com.knoldus
 import java.io.{BufferedWriter, File, FileWriter}
 import java.util
 import java.util.Properties
-
 import com.knoldus.model.{Constants, User}
-
 import scala.collection.JavaConverters._
 import org.apache.kafka.clients.consumer.KafkaConsumer
 
 
-object Consumer {
+object Consumer extends App {
 
 
   def readFromKafka(topic: String): Unit = {
@@ -30,7 +28,9 @@ object Consumer {
       val records = consumer.poll(Constants.timeout).asScala
       for (record <- records.iterator) {
         println(record.value())
+
       }
+
     }
   }
     readFromKafka("json")
