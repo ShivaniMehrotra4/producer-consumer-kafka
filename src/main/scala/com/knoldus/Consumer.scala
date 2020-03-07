@@ -31,7 +31,7 @@ object Consumer extends App {
     while (true) {
       val records = consumer.poll(Constants.timeout).asScala
       for (record <- records.iterator) {
-        //println(record.value())
+        println(record.value())
         writeUserToFile(record.value())
       }
 

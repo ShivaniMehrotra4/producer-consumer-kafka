@@ -5,10 +5,12 @@ import net.liftweb.json.{DefaultFormats, JValue}
 
 class ParseJson {
 
-  def parseData(): List[User] = {
-
-    def getJsonData: String = {
-      """  [
+  /**
+   * This function returns json data as string.
+   * @return - string user data json.
+   */
+  def getJsonData: String = {
+    """  [
       {
         "id": 0001,
         "name": "shivani",
@@ -18,7 +20,13 @@ class ParseJson {
       }
     ]
   """
-    }
+  }
+
+  /**
+   * This function parses json data.
+   * @return list of users
+   */
+  def parseData(): List[User] = {
 
     implicit val formats: DefaultFormats.type = DefaultFormats
 
