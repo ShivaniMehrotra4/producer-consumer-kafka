@@ -3,8 +3,6 @@ package com.knoldus.jsonUtilities
 import com.knoldus.model.User
 import net.liftweb.json.{DefaultFormats, JValue}
 
-import scala.io.{BufferedSource, Source}
-
 class ParseJson {
 
   def parseData(): List[User] = {
@@ -28,7 +26,6 @@ class ParseJson {
     //    val filePath = "./src/main/resources/PersonDetails.json"
     //    val jsonData = Source.fromFile(filePath)
     val parsedJson: JValue = net.liftweb.json.parse(jsonData)
-    //println(parsedJson.children.map(user => user.extract[User]))
     parsedJson.children.map(user => user.extract[User])
   }
 }

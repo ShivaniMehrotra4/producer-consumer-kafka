@@ -27,20 +27,18 @@ object Consumer extends App {
     while (true) {
       val records = consumer.poll(Constants.timeout).asScala
       for (record <- records.iterator) {
-        println(record.value())
-
+        //println(record.value())
+        writeUserToFile(record.value())
       }
 
     }
   }
     readFromKafka("json")
 
-  def writeUserToFile(user: List[User]): Unit = {
-    user.foreach(data => {
-      val writer = new BufferedWriter(new FileWriter(new File("./src/main/resources/userParsedData.txt")
+  def writeUserToFile(user: String): Unit = {
+    val writer = new BufferedWriter(new FileWriter(new File("./src/main/resources/userParsedData.txt")
         , true))
-      writer.write("\n" + data.toString)
       writer.close()
-    })
+
   }
 }
