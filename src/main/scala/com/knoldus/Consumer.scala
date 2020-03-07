@@ -10,7 +10,11 @@ import org.apache.kafka.clients.consumer.KafkaConsumer
 
 object Consumer extends App {
 
-
+  /**
+   * This function reads json parsed data from kafka pipeline.
+   *
+   * @param topic - topic pipeline
+   */
   def readFromKafka(topic: String): Unit = {
     //val topic = "json"
     val props = new Properties()
@@ -33,12 +37,19 @@ object Consumer extends App {
 
     }
   }
-    readFromKafka("json")
 
+  readFromKafka("json")
+
+  /**
+   * This function writes json parsed data from kafka pipeline to a file.
+   *
+   * @param user - parsed user data
+   */
   def writeUserToFile(user: String): Unit = {
     val writer = new BufferedWriter(new FileWriter(new File("./src/main/resources/userParsedData.txt")
-        , true))
-      writer.close()
+      , true))
+    writer.append(user)
+    writer.close()
 
   }
 }

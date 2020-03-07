@@ -9,6 +9,10 @@ object Producer extends App {
 
   val parseJson = new ParseJson
 
+  /**
+   * This function writes json parsed data into kafka pipeline.
+   * @param topic - topic pipeline
+   */
   def writeToKafka(topic: String): Unit = {
 
     val props = new Properties()
